@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'twitter'
+  spec.add_runtime_dependency 'activerecord'
+  spec.add_runtime_dependency 'sqlite3'
 end
