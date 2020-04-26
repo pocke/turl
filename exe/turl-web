@@ -1,0 +1,6 @@
+#!ruby
+
+require 'turl'
+require 'turl/web'
+
+Turl::Web.run(ARGV)
