@@ -40,6 +40,7 @@ module Turl
 
           twitter_user_id integer not null,
           content text not null,
+          tweeted_at datetime not null,
 
           created_at datetime not null,
           updated_at datetime not null

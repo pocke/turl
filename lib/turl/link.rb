@@ -3,6 +3,7 @@ module Turl
     has_many :tweet_links
     has_many :tweets, through: :tweet_links
 
+    # TODO: Make it configurable
     def self.ignored?(url)
       url.expanded_url.host == 'twitter.com'
     end

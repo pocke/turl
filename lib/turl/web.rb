@@ -12,6 +12,7 @@ module Turl
     end
 
     class App < Sinatra::Base
+      # TODO: Prevent XSS!!!
       get '/' do
         res = +''
         res << '<ul>'

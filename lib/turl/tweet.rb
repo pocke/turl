@@ -9,6 +9,7 @@ module Turl
         t.update!(
           content: tweet_resp.text,
           twitter_user: user,
+          tweeted_at: tweet_resp.created_at,
         )
       end
     end
