@@ -15,20 +15,21 @@ module Turl
     end
 
     def fetch_and_save(since_id:)
-      logger.info "start Turl::Collect#fetch_and_save(since_id: #{since_id.inspect})"
+      Turl.logger.info "start Turl::Collect#fetch_and_save(since_id: #{since_id.inspect})"
 
       tweets = client.home_timeline(count: 200)
-      tweets.each do |tweet|
-        next if tweet.retweet?
+      tweets.each do |tweet_resp|
+        next if tweet_resp.retweet?
 
-        id = tweet.id
+        tweet = Tweet.from_response!(tweet_resp)
 
-        tweet.urls.each do |url|
-          url = url.expanded_url.to_s
-          Link.create!(tweet_id: id, url: url)
+        tweet_resp.urls.each do |url|
+          next if Link.ignored?(url)
+
+          Link.from_response!(url, tweet)
         end
       end
-      logger.info "done Turl::Collect#fetch_and_save(since_id: #{since_id.inspect})"
+      Turl.logger.info "done Turl::Collect#fetch_and_save(since_id: #{since_id.inspect})"
       tweets.first&.id
     end
 
@@ -41,8 +42,5 @@ module Turl
       end
     end
 
-    private def logger
-      @logger ||= Logger.new(STDOUT)
-    end
   end
 end
