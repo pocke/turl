@@ -19,8 +19,6 @@ module Turl
 
       tweets = client.home_timeline(count: 200)
       tweets.each do |tweet_resp|
-        next if tweet_resp.retweet?
-
         tweet = Tweet.from_response!(tweet_resp)
 
         tweet_resp.urls.each do |url|
