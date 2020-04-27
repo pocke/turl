@@ -36,7 +36,8 @@ module Turl
     private def head(uri)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.scheme == 'https'
-      http.request_head([uri.path, uri.query].compact.join('?'))
+      path = [uri.path, uri.query].compact.join('?').presence || '/'
+      http.request_head(path)
     end
   end
 end
