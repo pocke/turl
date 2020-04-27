@@ -4,6 +4,7 @@ require 'pathname'
 require 'active_record'
 require 'nokogiri'
 require 'open-uri'
+require 'net/http'
 
 require "turl/version"
 require 'turl/collect'
@@ -12,6 +13,8 @@ require 'turl/link'
 require 'turl/tweet'
 require 'turl/twitter_user'
 require 'turl/tweet_link'
+require 'turl/url_normalization'
+require 'turl/normalizer'
 
 module Turl
   CACHE_PATH = Pathname('~/.cache/turl').expand_path
@@ -71,6 +74,18 @@ module Turl
         );
 
         create unique index uniq_twitter_users_twitter_id on twitter_users(twitter_id);
+
+        create table url_normalizations (
+          id integer primary key,
+
+          original_url text not null,
+          normalized_url text not null,
+
+          created_at datetime not null,
+          updated_at datetime not null
+        );
+
+        create unique index uniq_url_normalizations_original_url on url_normalizations(original_url);
       SQL
     end
   end

@@ -31,9 +31,8 @@ module Turl
       end
     end
 
-    # TODO: implement
     def self.normalize(url)
-      url
+      Normalizer.normalize(url)
     end
   end
 end
