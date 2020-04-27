@@ -2,5 +2,6 @@
 
 require 'turl'
 require 'turl/web'
+require 'erubi'
 
 Turl::Web.run(ARGV)

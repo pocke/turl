@@ -12,17 +12,11 @@ module Turl
     end
 
     class App < Sinatra::Base
-      # TODO: Prevent XSS!!!
+      set :erb, :escape_html => true
+
       get '/' do
-        res = +''
-        res << '<ul>'
-        Link.where('updated_at > ?', 1.week.ago).order(updated_at: :desc).each do |link|
-          res << "<li>"
-          res << %Q!<a href="#{link.normalized_url}">#{link.title}<br /><small>#{link.normalized_url}</small></a>!
-          res << "</li>"
-        end
-        res << '</ul>'
-        res
+        links = Link.where('updated_at > ?', 1.week.ago).order(updated_at: :desc)
+        erb :'root.html', locals: { links: links }
       end
     end
   end

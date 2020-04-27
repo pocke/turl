@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'sqlite3'
   spec.add_runtime_dependency 'nokogiri'
   spec.add_runtime_dependency 'sinatra'
+  spec.add_runtime_dependency 'erubi'
 end

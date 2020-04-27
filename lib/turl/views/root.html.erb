@@ -1,0 +1,11 @@
+<%= '<script>alert("a")</script>' %>
+<ul>
+  <% links.each do |link| %>
+    <li>
+      <a href="<%= link.normalized_url %>">
+        <%= link.title %>
+        <br />
+        <small><%= link.normalized_url %></small>
+    </li>
+  <% end %>
+</ul>
