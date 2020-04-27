@@ -13,6 +13,8 @@ module Turl
     end
 
     private def normalize_internal(url, path:)
+      return url if path.include?(url) || path.size > 30
+
       path << url
 
       ret = UrlNormalization.find_by(original_url: url)
