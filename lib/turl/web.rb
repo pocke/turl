@@ -16,7 +16,11 @@ module Turl
 
       get '/' do
         links = Link.where('updated_at > ?', 1.week.ago).order(updated_at: :desc)
-        erb :'root.html', locals: { links: links }
+        erb :'root.html', locals: { links: links }, layout: :'layout.html'
+      end
+
+      get '/app.css' do
+        scss :app
       end
     end
   end

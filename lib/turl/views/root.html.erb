@@ -1,8 +1,8 @@
-<ul>
+<ul class="links">
   <% links.each do |link| %>
-    <li>
+    <li class="links-item">
       <a href="<%= link.normalized_url %>">
-        <%= link.title %>
+        <h3><%= link.title %></h3>
         <br />
         <small><%= link.normalized_url %></small>
     </li>

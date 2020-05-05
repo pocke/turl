@@ -1,0 +1,15 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.links {
+  list-style-type: none;
+
+  &-item {
+    display: block;
+    width: 800px;
+    border: 1px solid #999;
+    margin-top: 10px;
+  }
+}
