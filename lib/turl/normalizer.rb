@@ -21,10 +21,13 @@ module Turl
       return ret.normalized_url if ret
 
       parsed = URI.parse(url)
+      query = parsed.query && URI.decode_www_form(parsed.query).to_h
       case
       when parsed.host == 'htn.to'
         resp = head(parsed)
         normalize_internal(resp['x-redirect-to'] || url, path: path)
+      when parsed.host == 'b.hatena.ne.jp' && query.dig('url')
+        normalize_internal(query['url'], path: path)
       else
         resp = head(parsed)
         if resp.is_a?(Net::HTTPRedirection) && resp['location']
